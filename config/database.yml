@@ -8,6 +8,7 @@ development:
   encoding: UTF8
   host: localhost
   username: the_wordler
+  password: gogogo123
   database: word_dar_dev
   pool: 5
 
