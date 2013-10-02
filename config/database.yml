@@ -6,6 +6,8 @@
 development:
   adapter: postgresql
   encoding: UTF8
+  host: localhost
+  username: the_wordler
   database: word_dar_dev
   pool: 5
 
@@ -15,11 +17,13 @@ development:
 test:
   adapter: postgresql
   encoding: UTF8
+  username: the_wordler
   database: word_dar_test
   pool: 5
 
 production:
   adapter: sqlite3
   encoding: UTF8
+  username: the_wordler
   database: word_dar_prod
   pool: 5
