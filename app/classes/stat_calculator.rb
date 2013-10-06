@@ -5,20 +5,23 @@ class StatCalculator
   end
 
   def last_week
-    @word.daily_counts.where(day: (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week)).inject{|sum, c|sum+c.count}
+    counts = @word.daily_counts.where(day: (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week))
+    sum_counts(counts)
   end
 
   def this_week
     counts = @word.daily_counts.where(day: (Time.now.midnight - 1.weeks)..(Time.now.midnight))
-    sum = 0
-    counts.each do |c|
-      sum += c.count
-    end
-    sum
+    sum_counts(counts)
   end
 
   def today
     counts = @word.daily_counts.where(day: (Time.now.midnight)..(Time.now))
+    sum_counts(counts)
+  end
+
+  private
+
+  def sum_counts counts
     sum = 0
     counts.each do |c|
       sum += c.count
