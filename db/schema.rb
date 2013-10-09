@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002034001) do
+ActiveRecord::Schema.define(version: 20131002041353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "crawl_queues", force: true do |t|
+    t.json     "crawl_params"
+    t.string   "crawler"
+    t.datetime "last_crawl"
+  end
 
   create_table "daily_counts", force: true do |t|
     t.integer  "count"
