@@ -5,17 +5,27 @@ class StatCalculator
   end
 
   def last_week
-    counts = @word.daily_counts.where(day: (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week))
-    sum_counts(counts)
+    total_count_for_range (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week-1.second)
   end
 
   def this_week
-    counts = @word.daily_counts.where(day: (Time.now.midnight - 1.weeks)..(Time.now.midnight))
-    sum_counts(counts)
+    total_count_for_range (Time.now.midnight - 6.days)..(Time.now.midnight+1.day-1.second)
   end
 
   def today
-    counts = @word.daily_counts.where(day: (Time.now.midnight)..(Time.now))
+    total_count_for_range (Time.now.midnight)..(Time.now)
+  end
+
+  def yesterday
+    total_count_for_range (Time.now.midnight-1.day)..(Time.now.midnight-1.second)
+  end
+
+  def last_30_days
+    total_count_for_range (Time.now.midnight - 29.days)..(Time.now.midnight+1.day-1.second)
+  end
+
+  def total_count_for_range range
+    counts = @word.daily_counts.where(day: range)
     sum_counts(counts)
   end
 
