@@ -12,12 +12,13 @@ gem 'snoo'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'haml-rails'
+gem 'therubyracer', '~> 0.10.2'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '~> 1.3.0'
 
-group :assets do
-  gem 'therubyracer', '~> 0.10.2'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '~> 1.3.0'
-end
+# Add Foundation Here
+gem 'compass-rails' # you need this or you get an err
+gem 'zurb-foundation', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -30,6 +31,13 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+gem 'ap'
+
+group :test do
+  gem 'minitest', '~> 4.7'
+  gem 'database_cleaner'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
