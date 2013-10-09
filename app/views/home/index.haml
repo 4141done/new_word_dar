@@ -1,0 +1,28 @@
+.row
+  .large-12.columns
+    %h1
+      New Word Dar
+
+    %h2
+      Word Statistics
+
+    - if @helpful_hint
+      %p
+        There are no words in your database. Run
+        %code
+          rake db:seed
+        for test data.
+
+    %table
+      %tr
+        %th
+          Word
+        %th
+          Today
+        %th
+          Yesterday
+        %th
+          This Week
+        %th
+          Last Week
+      = render partial: 'word_stats', collection: @words, as: :word
