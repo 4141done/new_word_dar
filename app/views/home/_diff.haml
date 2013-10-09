@@ -1,0 +1,8 @@
+- if change.to_i > 0
+  %span.positive
+    = "+#{change}"
+- elsif change.to_i < 0
+  %span.negative
+    = change
+- else
+  = change
