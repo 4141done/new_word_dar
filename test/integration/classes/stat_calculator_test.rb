@@ -22,6 +22,10 @@ describe StatCalculator do
     @calc.yesterday.must_equal 3
   end
 
+  it "should show count for two days ago" do
+    @calc.two_days_ago.must_equal 2
+  end
+
   it "should show this week's total word count" do
     @calc.this_week.must_equal 10
   end
@@ -32,5 +36,13 @@ describe StatCalculator do
 
   it "should show last 30 days total word count" do
     @calc.last_30_days.must_equal 27
+  end
+
+  it "should calculate change from 2 days ago to yesterday" do
+    @calc.diff_last_two_days.must_equal 1
+  end
+
+  it "should calculate change from last week to this week" do
+    @calc.diff_last_two_weeks.must_equal -7
   end
 end

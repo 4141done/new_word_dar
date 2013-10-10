@@ -2,10 +2,12 @@
   %td
     = word.word
   %td
-    = word.stats.today
-  %td
     = word.stats.yesterday
+    = render partial: 'diff', locals: {change: word.stats.diff_last_two_days}
+  %td
+    = word.stats.two_days_ago
   %td
     = word.stats.this_week
+    = render partial: 'diff', locals: {change: word.stats.diff_last_two_weeks}
   %td
     = word.stats.last_week

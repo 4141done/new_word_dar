@@ -20,8 +20,20 @@ class StatCalculator
     total_count_for_range (Time.now.midnight-1.day)..(Time.now.midnight-1.second)
   end
 
+  def two_days_ago
+    total_count_for_range (Time.now.midnight-2.days)..(Time.now.midnight-1.day-1.second)
+  end
+
   def last_30_days
     total_count_for_range (Time.now.midnight - 29.days)..(Time.now.midnight+1.day-1.second)
+  end
+
+  def diff_last_two_days
+    yesterday - two_days_ago
+  end
+
+  def diff_last_two_weeks
+    this_week - last_week
   end
 
   def total_count_for_range range
