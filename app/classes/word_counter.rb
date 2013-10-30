@@ -27,14 +27,14 @@ class WordCounter
 
 
   def clean_and_tokenize string
-    s = string.gsub(/\n/, ' ').gsub(/ /, '_').gsub(/[\W]/, '').gsub(/_/, ' ').downcase
+    s = string.gsub(/\n/, ' ').gsub(/ /, '_').gsub(/_/, ' ').downcase
     words = s.split(' ').compact
     long_words = words.select { |w| (w.length > 3 && w.length < 255) }
     return long_words
   end
 
   def filter_words words
-    filtered_words = words.select { |w| !@blacklist.include?(w) }
+    filtered_words = words.select { |w| !@blacklist.include?(w) && !w.match(/\W/) }
     return filtered_words
   end
 
