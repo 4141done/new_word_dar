@@ -2,6 +2,8 @@
   %td
     = word.word
   %td
+    = word.context
+  %td
     = word.yesterday
     = render partial: 'diff', locals: {change: word.diff_last_two_days.to_i}
   %td
