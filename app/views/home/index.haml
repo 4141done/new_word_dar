@@ -1,16 +1,17 @@
 .row
   .large-12.columns
-    %h1
-      New Word Dar
-
-    %h2
-      Word Statistics
-
     .row
-      .large-1.columns.large-offset-10
+      .large-4.columns
+        %h1
+          New Word Dar
+      .large-1.columns.large-offset-7
+        %br
         = form_tag refresh_statistics_path, method: :patch
         %button.small.button
           Refresh Statistics
+
+
+
 
     - if @helpful_hint
       %p

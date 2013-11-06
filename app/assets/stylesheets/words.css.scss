@@ -24,3 +24,23 @@ span.negative {
 .pretty th .desc {
   background-image: url(/assets/down_arrow.png);
 }
+
+.pagination {
+  * {
+    border: 1px solid black;
+    padding: 1px 4px;
+  }
+  .gap {
+    border: none;
+  }
+  .previous_page {
+    margin-right: 20px;
+  }
+  .next_page {
+    margin-left: 20px;
+  }
+  .current {
+    color: white;
+    background-color: black;
+  }
+}
