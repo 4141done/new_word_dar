@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @words = Word.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    @words = Word.order(sort_column + " " + sort_direction + ", word ASC").paginate(:page => params[:page])
     if @words.empty?
       @helpful_hint = true
     end
