@@ -1,16 +1,19 @@
 class WordCounter
 
+  # TODO: NEXT STEP is to be able to add words to a blacklist via the UI
+  # This entails adding all blacklist words to the DB, thinking there might be
+  # a source for blacklist word as well (e.g. wikipedia, unix, etc)
+
   # http://wordlist.sourceforge.net/12dicts-readme.html#2of12inf
   # d = File.open('lib/2of12inf.txt').lines.map { |word| word.strip.downcase }
-  def initialize blacklist=[]
-    @blacklist = Set.new blacklist
-    @contexts = {}
+  def initialize skip_words=[]
+    @skip_words= Set.new skip_words
   end
 
   def process string, date=Time.now
-    words_with_context = clean_and_tokenize_with_context string
-    words_to_count = filter_words words_with_context
-    counts = count_words words_to_count
+    @contexts = []
+    words_with_context = clean_and_filter_with_context string
+    counts = count_words words_with_context
 
     counts.each { |word_with_context, count|
       word = word_with_context[0]
@@ -24,22 +27,25 @@ class WordCounter
     }
   end
 
-
-  def clean_and_tokenize_with_context string
+  def clean_and_filter_with_context string
+    print "Cleaning"
     words = []
     sentences = string.split(/[.!?] |\n/)
     sentences.each { |sentence|
+      print '.'
       s = sentence.gsub(/\n/, ' ').gsub(/ /, '_').gsub(/_/, ' ').downcase
       sentence_words = s.split(' ').compact
-      sentence_words = sentence_words.select { |w| (w.length > 3 && w.length < 255) }
+      sentence_words = filter_words(sentence_words)
       words = words + sentence_words.map { |sw| [sw, sentence[0...255]] }
     }
     return words
   end
 
-  def filter_words words_with_context
-    filtered_words = words_with_context.select { |w| !@blacklist.include?(w[0]) && !w[0].match(/\W/) }
-    return filtered_words
+  def filter_words words
+    return words.select { |w|
+      (w.length > 3 && w.length < 255) &&
+        !@skip_words.include?(w) &&
+        !w.match(/\W/) }
   end
 
   def count_words words_with_context

@@ -1,0 +1,2 @@
+class SkipWordController < ApplicationController
+end

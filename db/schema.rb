@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20131106032957) do
   add_index "daily_counts", ["word_id", "day"], name: "index_daily_counts_on_word_id_and_day", unique: true, using: :btree
   add_index "daily_counts", ["word_id"], name: "index_daily_counts_on_word_id", using: :btree
 
+  create_table "skip_words", force: true do |t|
+    t.string "word",   null: false
+    t.string "source", null: false
+  end
+
+  add_index "skip_words", ["word"], name: "index_skip_words_on_word", unique: true, using: :btree
+
   create_table "words", force: true do |t|
     t.string   "word"
     t.string   "context"
