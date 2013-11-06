@@ -47,6 +47,7 @@ end
 group :development do
   gem 'awesome_print'
   gem 'pry'
+  gem 'disable_assets_logger'
 end
 
 # Use ActiveModel has_secure_password

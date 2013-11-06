@@ -6,6 +6,12 @@
     %h2
       Word Statistics
 
+    .row
+      .large-1.columns.large-offset-10
+        = form_tag refresh_statistics_path, method: :patch
+        %button.small.button
+          Refresh Statistics
+
     - if @helpful_hint
       %p
         There are no words in your database. Run

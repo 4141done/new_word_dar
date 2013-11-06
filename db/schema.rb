@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002052807) do
+ActiveRecord::Schema.define(version: 20131106032957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cached_statistics", force: true do |t|
+    t.string   "name"
+    t.integer  "word_id"
+    t.decimal  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "crawl_queues", force: true do |t|
     t.json     "crawl_params"
@@ -39,6 +47,14 @@ ActiveRecord::Schema.define(version: 20131002052807) do
     t.string   "context"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "last_week"
+    t.integer  "this_week"
+    t.integer  "today"
+    t.integer  "yesterday"
+    t.integer  "two_days_ago"
+    t.integer  "last_30_days"
+    t.integer  "diff_last_two_days"
+    t.integer  "diff_last_two_weeks"
   end
 
   add_index "words", ["word"], name: "index_words_on_word", unique: true, using: :btree

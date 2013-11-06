@@ -47,6 +47,7 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     database_cleaner (1.1.1)
+    disable_assets_logger (1.0.0)
     erubis (2.7.0)
     execjs (2.0.1)
     fssm (0.2.10)
@@ -156,6 +157,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails
   database_cleaner
+  disable_assets_logger
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails

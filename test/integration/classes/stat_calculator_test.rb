@@ -11,7 +11,8 @@ describe StatCalculator do
     DailyCount.create(count: 6, day: Time.now.midnight+6.hours-8.days, word: word)
     DailyCount.create(count: 11, day: Time.now.midnight+6.hours-10.days, word: word)
 
-    @calc = word.stats
+    @calc = word
+    @calc.refresh_statistics
   end
 
   it "should show today's word counts" do

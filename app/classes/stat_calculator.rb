@@ -1,15 +1,16 @@
 class StatCalculator
+  attr_reader :word
 
   def initialize word
     @word = word
   end
 
   def last_week
-    total_count_for_range (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week-1.second)
+    @last_week ||= total_count_for_range (Time.now.midnight - 2.weeks)..(Time.now.midnight - 1.week-1.second)
   end
 
   def this_week
-    total_count_for_range (Time.now.midnight - 6.days)..(Time.now.midnight+1.day-1.second)
+    @this_week ||= total_count_for_range (Time.now.midnight - 6.days)..(Time.now.midnight+1.day-1.second)
   end
 
   def today
@@ -17,11 +18,11 @@ class StatCalculator
   end
 
   def yesterday
-    total_count_for_range (Time.now.midnight-1.day)..(Time.now.midnight-1.second)
+    @yesterday ||= total_count_for_range (Time.now.midnight-1.day)..(Time.now.midnight-1.second)
   end
 
   def two_days_ago
-    total_count_for_range (Time.now.midnight-2.days)..(Time.now.midnight-1.day-1.second)
+    @two_days_ago ||= total_count_for_range (Time.now.midnight-2.days)..(Time.now.midnight-1.day-1.second)
   end
 
   def last_30_days
