@@ -19,16 +19,20 @@
           rake db:seed
         for test data.
 
-    %table
+    = will_paginate @words
+
+    %table.pretty
       %tr
         %th
-          Word
+          = sortable 'word'
         %th
-          Yesterday
+          = sortable 'yesterday'
         %th
-          Two Days Ago
+          = sortable 'two_days_ago'
         %th
-          This Week
+          = sortable 'this_week'
         %th
-          Last Week
+          = sortable 'last_week'
       = render partial: 'word_stats', collection: @words, as: :word
+
+    = will_paginate @words
