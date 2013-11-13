@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106032957) do
+ActiveRecord::Schema.define(version: 20131113023345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(version: 20131106032957) do
   add_index "daily_counts", ["word_id"], name: "index_daily_counts_on_word_id", using: :btree
 
   create_table "skip_words", force: true do |t|
-    t.string "word",   null: false
-    t.string "source", null: false
+    t.string   "word",       null: false
+    t.string   "source",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "skip_words", ["word"], name: "index_skip_words_on_word", unique: true, using: :btree

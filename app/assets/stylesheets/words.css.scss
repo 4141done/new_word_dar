@@ -48,3 +48,18 @@ span.negative {
     border-color: #ddd;
   }
 }
+
+#flash_container {
+  z-index: 9999;
+  position: fixed;
+  top: 10px;
+  text-align: center;
+  width: 100%;
+
+  #flash {
+    padding: 5px 10px;
+    display: inline-block;
+    background-color: #CCC;
+    min-width: 400px;
+  }
+}

@@ -1,5 +1,7 @@
 %tr
   %td
+    = link_to("SKIP", skip_words_path(word: word.word), remote: true, method: 'POST', class: 'skip')
+  %td
     = word.word
   %td
     = word.context

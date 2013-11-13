@@ -1,0 +1,12 @@
+- if flash.present?
+  #flash_container{:style => 'display:none'}
+    #flash
+      - if flash[:alert]
+        #alert.flash= flash[:alert]
+      - if flash[:notice]
+        #notice.flash= flash[:notice]
+      - if flash[:error]
+        #warning.flash= flash[:error]
+    :javascript
+      $('#flash_container').delay(500).slideDown().delay(4800).slideUp();
+  - flash.discard

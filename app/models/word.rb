@@ -1,5 +1,5 @@
 class Word < ActiveRecord::Base
-  has_many :daily_counts
+  has_many :daily_counts, dependent: :destroy
 
   def refresh_statistics
     calculator = StatCalculator.new(self)

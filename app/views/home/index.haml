@@ -1,3 +1,10 @@
+:javascript
+  $(document).ready(function() {
+    $('.skip').on('click', function() {
+      $(this).parents('tr').hide();
+    });
+  });
+
 .row
   .large-12.columns
     .row
@@ -24,6 +31,7 @@
 
     %table.pretty
       %tr
+        %th
         %th
           = sortable 'word'
         %th
