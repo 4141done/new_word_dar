@@ -1,0 +1,6 @@
+.panel
+  %h3
+    %a{ href: "http://www.reddit.com/r/#{q.crawl_params['subreddit']}", target: '_blank' }
+      = q.crawl_params['subreddit']
+  %h5.subheader
+    = "Crawled #{q.crawl_params['crawled_thread_ids'].keys.count} threads so far"

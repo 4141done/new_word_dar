@@ -4,4 +4,5 @@ NewWordDar::Application.routes.draw do
   root 'home#index'
 
   resources :skip_words, only: [:new, :create, :index]
+  resources :crawl_queues
 end

@@ -1,0 +1,9 @@
+.row
+  .large-12.columns
+    %h1 Subreddits On Crawl List
+    = render partial: 'crawl_queues/queue_item', :collection => @queues, :as => :q
+    %a.button{ data: { reveal: { id: 'add-modal' } } } + 
+
+#add-modal.reveal-modal
+  %h3 Bro, let's add something else
+  %a.close-reveal-modal &#215;

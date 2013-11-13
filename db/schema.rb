@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113023345) do
+ActiveRecord::Schema.define(version: 20131113051417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131113023345) do
     t.json     "crawl_params"
     t.string   "crawler"
     t.datetime "last_crawl"
+    t.boolean  "disabled",     default: false
   end
 
   create_table "daily_counts", force: true do |t|

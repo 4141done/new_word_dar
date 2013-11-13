@@ -27,3 +27,7 @@ CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'worldnew
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'AskReddit', crawled_thread_ids: {} } )
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'WTF', crawled_thread_ids: {} } )
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'AdviceAnimals', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'OkCupid', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'funny', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'gaming', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'IAmA', crawled_thread_ids: {} } )
