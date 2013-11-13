@@ -15,4 +15,13 @@ namespace :skip_words do
     end
   end
 
+  task :export => :environment do
+    manual_skip_words = SkipWord.where(source: 'manual')
+    File.open("skip_words/manual.data", 'w') { |f|
+      manual_skip_words.each { |word|
+        f.write("#{word.word}\n")
+      }
+    }
+  end
+
 end
