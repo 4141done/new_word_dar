@@ -3,17 +3,17 @@
 class RedditCrawler < Crawler
   @client = Snoo::Client.new
 
-  def self.crawl_item(crawl_info)
-    f = File.new("circlejerk.txt", "w+")
-    index = get_subreddit_index(crawl_info)
+  def self.crawl_subreddit(subreddit_name)
+    f = File.new("lib/test_dumps/#{subreddit_name}#{Date.today.strftime("%m-%d-%Y") }.txt", "w+")
+    index = get_subreddit_index(subreddit_name)
     each_thread(index) do |thread|
-      parse_topic(thread, f)
+      f.write(parse_topic(thread, f))
     end
     f.close
   end
 
-  def self.get_subreddit_index(crawl_info)
-    move_down_a_level(@client.get_listing( subreddit: crawl_info))
+  def self.get_subreddit_index(subreddit_name)
+    move_down_a_level(@client.get_listing( subreddit: subreddit_name))
   end
 
   def self.each_thread(subreddit_index, &block)
@@ -28,25 +28,35 @@ class RedditCrawler < Crawler
 
     sleep 1
     top_level_comments = @client.get_comments(
-      # subreddit: topic[:subreddit].downcase,
       link_id:   topic[:data][:id],
       limit:     1000,
-      depth:     1
+      depth:     30
     )
-
-    isFirst = true
+    result = []
     top_level_comments.each do |comment|
-
-      isFirst = false && next if isFirst
-      comment['data']['children'].each do |c|
-        file.write(" #{c['data']['body']}") if c['data']['body']
-      end
+      result += parse_level(comment['data']['children'])
     end
+
+    result
   end
 
-  def self.parse_params(crawl_info)
-    subreddit = crawl_info[:subreddit]
+  def self.parse_level(comments)
+    got = []
 
+    comments.each do |c|
+      next unless c['data'].present?
+      got << c['data']['body'] if c['data']['body'].present?
+
+      if c['data'] && c['data']['replies'].present?
+        got += parse_level(c['data']['replies']['data']['children'])
+      end
+    end
+
+    got
+  end
+
+  def self.parse_params(subreddit_name)
+    subreddit = subreddit_name[:subreddit]
   end
 
   def self.move_down_a_level(hash_position)
