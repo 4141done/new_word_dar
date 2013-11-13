@@ -3,13 +3,21 @@
 class RedditCrawler < Crawler
   @client = Snoo::Client.new
 
-  def self.crawl_subreddit(subreddit_name)
-    f = File.new("lib/test_dumps/#{subreddit_name}#{Date.today.strftime("%m-%d-%Y") }.txt", "w+")
-    index = get_subreddit_index(subreddit_name)
+  def self.crawl_item(item)
+    params = item.crawl_params
+    subreddit = params['subreddit']
+    crawled_threads = params['crawled_thread_ids']
+
+    f = File.new("lib/test_dumps/#{subreddit}#{Date.today.strftime("%m-%d-%Y") }.txt", "w+")
+    index = get_subreddit_index(subreddit)
     each_thread(index) do |thread|
+      next if crawled_threads[thread['data']['id']]
+      crawled_threads[thread['data']['id']] = Time.now
       f.write(parse_topic(thread, f))
     end
     f.close
+    item.crawl_params = { subreddit: subreddit, crawled_thread_ids: crawled_threads }
+    item.save!
   end
 
   def self.get_subreddit_index(subreddit_name)

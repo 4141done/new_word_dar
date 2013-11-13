@@ -22,3 +22,8 @@ DailyCount.create(word: b, day: Time.now.midnight, count: 15)
 DailyCount.create(word: b, day: Time.now.midnight-1.day, count:91)
 DailyCount.create(word: b, day: Time.now.midnight-2.days, count:42)
 DailyCount.create(word: b, day: Time.now.midnight-1.week-1.second, count:79)
+
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'worldnews', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'AskReddit', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'WTF', crawled_thread_ids: {} } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'AdviceAnimals', crawled_thread_ids: {} } )
