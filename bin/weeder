@@ -1,14 +1,29 @@
 #!/usr/bin/env ruby
 
+source = ARGV[0]
+destination = ARGV[1]
+if ARGV.count < 2
+  puts "Please provide two arguments: "
+  puts " "
+  puts " Usage: "
+  puts "         ./weeder [source_path] [LALALA]"
+  puts " "
+  puts "Output will be written to skip_words/[LALALA].data"
+  puts " "
+  exit
+end
+
+
+
 # Run this script from inside the ./bin directory
 
-weeded = File.open('../skip_words/wikipedia.data', 'w')
+weeded = File.open("../skip_words/#{destination}.data", 'w')
 
 def keep? word
   word.strip =~ /^[a-zA-Z][a-z0-9]{3,}$/
 end
 
-File.open('../enwiki-latest-all-titles-in-ns0','r') do |f|
+File.open(source,'r') do |f|
   while line = f.gets
     weeded.write(line.strip.downcase + "\n") if !(line.nil?) && keep?(line)
   end
