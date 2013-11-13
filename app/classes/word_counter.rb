@@ -45,7 +45,8 @@ class WordCounter
     return words.select { |w|
       (w.length > 3 && w.length < 255) &&
         !@skip_words.include?(w) &&
-        !w.match(/\W/) }
+        !w.match(/\W/) &&
+        w.match(/^[a-z]/) }
   end
 
   def count_words words_with_context
