@@ -5,13 +5,12 @@
 weeded = File.open('../skip_words/wikipedia.data', 'w')
 
 def keep? word
-  word =~ /^[a-zA-Z][a-z0-9]{3,}$/
+  word.strip =~ /^[a-zA-Z][a-z0-9]{3,}$/
 end
 
 File.open('../enwiki-latest-all-titles-in-ns0','r') do |f|
   while line = f.gets
-    line = f.gets
-    weeded.write(line.downcase) if !(line.nil?) && keep?(line)
+    weeded.write(line.strip.downcase + "\n") if !(line.nil?) && keep?(line)
   end
 end
 
