@@ -6,8 +6,7 @@ namespace :gobble do
     puts '--> Done crawling!'
 
     puts '--> Loading in Dictionaries!'
-    skip_words = SkipWord.all.select(:word).map(&:word)
-    wc = WordCounter.new skip_words
+    wc = WordCounter.new SkipWord.all_words
 
     CrawlQueue.crawled_files.each do |f|
       file = File.open(f)
@@ -26,8 +25,7 @@ namespace :gobble do
   task process_all: :environment do
     puts '!!! DUDER! This may cause duplicates if you didn\'t clear your words table !!!'
     puts '--> Loading in Dictionaries!'
-    skip_words = SkipWord.all.select(:word).map(&:word)
-    wc = WordCounter.new skip_words
+    wc = WordCounter.new SkipWord.all_words
 
     CrawlQueue.crawled_files.each do |f|
       file = File.open(f)

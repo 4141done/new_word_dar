@@ -1,7 +1,7 @@
 class SkipWordImporter
   def initialize
     @existing_skip_words = Set.new(
-      SkipWord.all.select(:word).map(&:word)
+      SkipWord.all_words
     )
   end
 

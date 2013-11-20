@@ -1,8 +1,7 @@
 class TestCount
   attr_accessor :word_counter
   def self.hello
-    skip_words = SkipWord.all.select(:word).map(&:word)
-    wc = WordCounter.new skip_words
+    wc = WordCounter.new SkipWord.all_words
     content = File.open("lib/test_dumps/worldnews11-12-2013.txt").read
     wc.process content
   end
@@ -15,8 +14,7 @@ class TestCount
       'AdviceAnimals.txt',
       'OkCupid.txt'
     ]
-    skip_words = SkipWord.all.select(:word).map(&:word)
-    wc = WordCounter.new skip_words
+    wc = WordCounter.new SkipWord.all_words
 
     to_import.each do |f|
       content = File.open("lib/test_dumps/#{f}").read
