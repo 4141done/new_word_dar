@@ -13,11 +13,9 @@ if ARGV.count < 2
   exit
 end
 
-
-
 # Run this script from inside the ./bin directory
-
-weeded = File.open("../skip_words/#{destination}.data", 'w')
+output_path = File.expand_path("../../skip_words/#{destination}.data", __FILE__)
+weeded = File.open(output_path, 'w')
 
 def keep? word
   word.strip =~ /^[a-zA-Z][a-z0-9]{3,}$/

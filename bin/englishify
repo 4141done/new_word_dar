@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+
+output_path = File.expand_path("../../wiktionary-enonly", __FILE__)
+weeded = File.open(output_path, 'w')
+
+fiveplus = IO.readlines(File.expand_path("../../skip_words/wiktionary2.data", __FILE__))
+
+fiveorsix = fiveplus.select{|word|word.length == 5 || word.length == 6}
+longer = fiveplus.select{|word| word.length > 6 }
+longer = longer.map{|word|word[0..-2]}
+
+def short word
+  word.length < 5
+end
+
+def long word, fiveorsix, longer
+  keep = false
+  fiveorsix.each do |noninflected|
+    if word.include?(noninflected)
+      keep = true
+      break
+    end
+  end
+  if !keep
+    longer.each do |noninflected|
+      if word.include?(noninflected)
+        keep = true
+        break
+      end
+    end
+  end
+  keep
+end
+
+
+all_words_path = File.expand_path("../../skip_words/wiktionary.data", __FILE__)
+count = %x{wc -l #{all_words_path}}.split.first.to_i
+puts count
+File.open(all_words_path,'r') do |f|
+  lineno = 0
+  while line = f.gets
+    lineno += 1
+    percent = lineno/count.to_f
+    puts "#{percent.round(5)}% - #{lineno} " + line.strip + "\n"
+    line = line.strip
+    keep = long(line, fiveorsix, longer) || short(line)
+    weeded.write(line + "\n") if keep
+  end
+end
+
+

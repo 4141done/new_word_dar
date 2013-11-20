@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require "rexml/document"
+
+url = 'http://en.wiktionary.org/wiki/Index:English/'
+
+output_path = File.expand_path("../../wiktionary-english", __FILE__)
+output_file = File.open(output_path, 'w')
+
+('a'..'z').to_a.each do |letter|
+  response = Net::HTTP.get(URI(url + letter))
+  puts "Downloading #{url + letter}"
+  doc = REXML::Document.new(response)
+  REXML::XPath.each(doc, "//ol/li/a") do |element|
+    puts element.text
+    output_file.write(element.text + "\n")
+  end
+end
