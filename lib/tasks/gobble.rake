@@ -10,12 +10,10 @@ namespace :gobble do
     wc = WordCounter.new skip_words
 
     CrawlQueue.crawled_files.each do |f|
-      file = File.open(f, 'w+')
+      file = File.open(f)
       content = file.read
       puts "--> Processing: #{f}"
       wc.process content
-
-      file.truncate(0)
     end
   end
 
