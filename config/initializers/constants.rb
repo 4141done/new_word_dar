@@ -1,0 +1,1 @@
+CRAWL_DUMPS_DIRECTORY = "#{Rails.root}/crawl_dumps"

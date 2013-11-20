@@ -8,7 +8,7 @@ class RedditCrawler < Crawler
     subreddit = params['subreddit']
     crawled_threads = params['crawled_thread_ids']
 
-    f = File.new("lib/test_dumps/#{subreddit}.txt", "a")
+    f = File.new("#{CRAWL_DUMPS_DIRECTORY}/#{subreddit}.txt", "a")
     index = get_subreddit_index(subreddit)
     each_thread(index) do |thread|
       next if crawled_threads[thread['data']['id']]

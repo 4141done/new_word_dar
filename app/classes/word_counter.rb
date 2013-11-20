@@ -30,7 +30,7 @@ class WordCounter
   def clean_and_filter_with_context string
     print "Cleaning"
     words = []
-    sentences = string.split(/[.!?] |\n/)
+    sentences = string.split(/[.!?]\s|\n/)
     sentences.each { |sentence|
       print '.'
       s = sentence.gsub(/\n/, ' ').gsub(/ /, '_').gsub(/_/, ' ').downcase
