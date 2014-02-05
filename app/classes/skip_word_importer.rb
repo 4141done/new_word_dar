@@ -9,7 +9,7 @@ class SkipWordImporter
     ap "Importing skip words from #{file}"
 
     batch = []
-    batch_size = 1000
+    batch_size = 10000
     num_words_imported = 0
     num_words_duplicate = 0
 
