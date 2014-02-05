@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140205035945) do
     t.text     "source"
     t.text     "source_id"
     t.text     "content"
+    t.boolean  "seen",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
