@@ -24,4 +24,8 @@ namespace :skip_words do
     }
   end
 
+  task :clear => :environment do
+    SkipWord.delete_all
+  end
+
 end
