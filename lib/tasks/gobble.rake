@@ -8,11 +8,9 @@ namespace :gobble do
     puts '--> Loading in Dictionaries!'
     wc = WordCounter.new SkipWord.all_words
 
-    CrawlQueue.crawled_files.each do |f|
-      file = File.open(f)
-      content = file.read
-      puts "--> Processing: #{f}"
-      wc.process content
+    UnprocessedDump.where(seen: false).each do |dump|
+      wc.process dump.content
+      dump.update_attributes(seen: true)
     end
   end
 
@@ -27,11 +25,8 @@ namespace :gobble do
     puts '--> Loading in Dictionaries!'
     wc = WordCounter.new SkipWord.all_words
 
-    CrawlQueue.crawled_files.each do |f|
-      file = File.open(f)
-      content = file.read
-      puts "--> Processing: #{f}"
-      wc.process content
+    UnprocessedDump.where(seen: false).each do |dump|
+      wc.process dump.content
     end
   end
 end

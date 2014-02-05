@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20140205035945) do
 
   add_index "skip_words", ["word"], name: "index_skip_words_on_word", unique: true, using: :btree
 
-  create_table "unprocessed_content", force: true do |t|
+  create_table "unprocessed_dumps", force: true do |t|
     t.text     "source"
     t.text     "source_id"
     t.text     "content"

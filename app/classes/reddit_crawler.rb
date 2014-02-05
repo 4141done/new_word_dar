@@ -6,18 +6,22 @@ class RedditCrawler < Crawler
   def self.crawl_item(item)
     params = item.crawl_params
     subreddit = params['subreddit']
-    crawled_threads = params['crawled_thread_ids']
 
-    f = File.new("#{CRAWL_DUMPS_DIRECTORY}/#{subreddit}.txt", "a")
     index = get_subreddit_index(subreddit)
-    each_thread(index) do |thread|
-      next if crawled_threads[thread['data']['id']]
-      crawled_threads[thread['data']['id']] = Time.now
-      f.write(parse_topic(thread, f))
+    each_thread(index) do |thread|  
+      next if VisitedThing.where(source: 'RedditCrawler', thing_id: thread['data']['id']).count > 0
+      
+      VisitedThing.create(
+        source:  'RedditCrawler',
+        thing_id: thread['data']['id']
+      )
+
+      UnprocessedDump.create(
+        source:    'RedditCrawler',
+        source_id: thread['data']['id'],
+        content:   parse_topic(thread)
+      )
     end
-    f.close
-    item.crawl_params = { subreddit: subreddit, crawled_thread_ids: crawled_threads }
-    item.save!
   end
 
   def self.get_subreddit_index(subreddit_name)
@@ -30,7 +34,7 @@ class RedditCrawler < Crawler
     end
   end
 
-  def self.parse_topic(topic, file)
+  def self.parse_topic(topic)
     my_dump = []
     topic = HashWithIndifferentAccess.new(topic)
 
@@ -40,23 +44,23 @@ class RedditCrawler < Crawler
       limit:     1000,
       depth:     30
     )
-    result = []
+    result = ''
     top_level_comments.each do |comment|
-      result += parse_level(comment['data']['children'])
+      result << parse_level(comment['data']['children'])
     end
 
     result
   end
 
   def self.parse_level(comments)
-    got = []
+    got = ''
 
     comments.each do |c|
       next unless c['data'].present?
       got << c['data']['body'] if c['data']['body'].present?
 
       if c['data'] && c['data']['replies'].present?
-        got += parse_level(c['data']['replies']['data']['children'])
+        got << parse_level(c['data']['replies']['data']['children'])
       end
     end
 

@@ -1,2 +1,2 @@
 class UnprocessedDump < ActiveRecord::Base
-end 
+end

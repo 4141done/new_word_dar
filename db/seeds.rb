@@ -30,4 +30,4 @@ CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'AdviceAn
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'OkCupid' } )
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'funny' } )
 CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'gaming' } )
-CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'IAmA' } } )
+CrawlQueue.create(crawler: 'RedditCrawler', crawl_params: { subreddit: 'IAmA' } )
