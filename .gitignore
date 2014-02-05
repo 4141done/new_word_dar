@@ -16,4 +16,5 @@
 /tmp
 /.idea
 .DS_Store
+/crawl_dumps
 
